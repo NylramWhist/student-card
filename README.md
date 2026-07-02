@@ -6,7 +6,6 @@ Simple Foundry VTT module for D&D 5e student campaigns.
 
 - Foundry Virtual Tabletop: generations 13 and 14
 - D&D 5e system: 5.0.0 or newer; verified with 5.3.3
-- Tidy 5e Sheets: classic and modern actor sheets; verified with 13.5.0
 
 ## Features
 
