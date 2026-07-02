@@ -28,16 +28,6 @@ Simple Foundry VTT module for D&D 5e student campaigns.
 - Client setting for showing or hiding the floating button.
 - Polish and English localization.
 
-## Installation
-
-In Foundry VTT, open **Add-on Modules**, choose **Install Module**, and paste this Manifest URL:
-
-```text
-https://raw.githubusercontent.com/NylramWhist/student-card/main/module.json
-```
-
-You can also copy the `student-card` folder into your Foundry `Data/modules` folder for a manual installation.
-
 ## Usage
 
 - Players can open their own card with the floating graduation-cap button.
