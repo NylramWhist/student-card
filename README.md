@@ -6,6 +6,7 @@ Simple Foundry VTT module for D&D 5e student campaigns.
 
 - Foundry Virtual Tabletop: generations 13 and 14
 - D&D 5e system: 5.0.0 or newer; verified with 5.3.3
+- Tidy 5e Sheets: classic and modern actor sheets; verified with 13.5.0
 
 ## Features
 
@@ -27,6 +28,16 @@ Simple Foundry VTT module for D&D 5e student campaigns.
 - Client setting for showing or hiding the floating button.
 - Polish and English localization.
 
+## Installation
+
+In Foundry VTT, open **Add-on Modules**, choose **Install Module**, and paste this Manifest URL:
+
+```text
+https://raw.githubusercontent.com/NylramWhist/student-card/main/module.json
+```
+
+You can also copy the `student-card` folder into your Foundry `Data/modules` folder for a manual installation.
+
 ## Usage
 
 - Players can open their own card with the floating graduation-cap button.
@@ -40,7 +51,12 @@ This module intentionally avoids copying adventure text. It provides the tracker
 
 ## Changelog
 
-### 1.1.16
+### 1.1.18
 
-- Added a collapsible Student Dice panel so the lower section can be hidden when it is not being used.
-- The collapse state is remembered per client and per actor.
+- Moved the Tidy 5e Sheets launcher from the header menu into the character tab bar.
+- Fixed legacy card data reads when the former module ID is no longer active.
+
+### 1.1.17
+
+- Moved the Tidy 5e Sheets button to Tidy's official character header controls.
+- Prevented duplicate and misplaced Student Card buttons on Tidy character sheets.

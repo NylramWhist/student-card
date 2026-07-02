@@ -3,7 +3,7 @@
     "type":  "module",
     "title":  "Student Card",
     "description":  "An actor-linked student record for relationships, exams, extracurriculars, jobs, graduation, and Student Dice automation.",
-    "version":  "1.1.16",
+    "version":  "1.1.18",
     "authors":  [
                     {
                         "name":  "Tomorokoshi"
@@ -48,7 +48,7 @@
     "readme":  "README.md",
     "url":  "https://github.com/NylramWhist/student-card",
     "manifest":  "https://raw.githubusercontent.com/NylramWhist/student-card/main/module.json",
-    "download":  "https://github.com/NylramWhist/student-card/releases/download/v1.1.16/student-card.zip",
+    "download":  "https://github.com/NylramWhist/student-card/releases/download/v1.1.18/student-card.zip",
     "bugs":  "https://github.com/NylramWhist/student-card/issues",
     "changelog":  "https://github.com/NylramWhist/student-card/releases"
 }
