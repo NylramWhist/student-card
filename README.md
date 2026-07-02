@@ -53,10 +53,5 @@ This module intentionally avoids copying adventure text. It provides the tracker
 
 ### 1.1.16
 
-- Added GitHub release metadata and automatic Foundry VTT package publishing.
-- Added a stable manifest URL for installation and update checks.
-
-### 1.1.15
-
 - Added a collapsible Student Dice panel so the lower section can be hidden when it is not being used.
 - The collapse state is remembered per client and per actor.
