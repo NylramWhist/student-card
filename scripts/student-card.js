@@ -1,8 +1,9 @@
 const MODULE_ID = "student-card";
 const LEGACY_MODULE_ID = "strixhaven-student-card";
-const MODULE_VERSION = "1.1.16";
+const MODULE_VERSION = "1.1.18";
 const DATA_VERSION = 1;
 const FLAG_KEY = "card";
+const TIDY_TAB_ID = `${MODULE_ID}-open-card`;
 const MAX_IMPORT_BYTES = 1_000_000;
 const MAX_PICKER_SKILLS = 3;
 const SETTINGS = {
@@ -91,9 +92,11 @@ Hooks.once("ready", () => {
   setTimeout(refreshLauncher, 3000);
 });
 
+Hooks.once("tidy5e-sheet.ready", registerTidySheetIntegration);
+
 Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
   const actor = app?.actor ?? app?.document;
-  if (!isCharacterActor(actor) || !canViewActor(actor)) return;
+  if (isTidyCharacterSheet(app) || !isCharacterActor(actor) || !canViewActor(actor)) return;
   buttons.unshift({
     label: game.i18n.localize("SSC.SheetButton"),
     class: "student-card-open",
@@ -104,7 +107,6 @@ Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
 
 Hooks.on("renderActorSheet", injectActorSheetButton);
 Hooks.on("renderActorSheetV2", injectActorSheetButton);
-Hooks.on("tidy5e-sheet.renderActorSheet", injectActorSheetButton);
 Hooks.on("renderActorDirectory", injectDirectoryButton);
 Hooks.on("dnd5e.restCompleted", resetDiceAfterLongRest);
 Hooks.on("dnd5e.rollSkill", (_rolls, data) => queueRollPrompts(data, "skill"));
@@ -136,7 +138,7 @@ function addLauncher() {
 
 function injectActorSheetButton(app, html) {
   const actor = app?.actor ?? app?.document;
-  if (!isCharacterActor(actor) || !canViewActor(actor)) return;
+  if (isTidyCharacterSheet(app) || !isCharacterActor(actor) || !canViewActor(actor)) return;
 
   const root = getHtmlRoot(html) ?? getHtmlRoot(app?.element);
   if (!root) return;
@@ -158,6 +160,51 @@ function injectActorSheetButton(app, html) {
   root.append(wrapper);
 }
 
+function registerTidySheetIntegration(api) {
+  api.registerCharacterTab(new api.models.HtmlTab({
+    title: game.i18n.localize("SSC.SheetButton"),
+    iconClass: "fas fa-graduation-cap",
+    tabId: TIDY_TAB_ID,
+    html: `
+      <div class="ssc-tidy-tab-launcher">
+        <button type="button" class="ssc-tidy-tab-open">
+          <i class="fas fa-graduation-cap"></i>
+          ${game.i18n.localize("SSC.OpenCard")}
+        </button>
+      </div>
+    `,
+    onRender(params) {
+      bindTidyTabLauncher(params);
+    }
+  }));
+}
+
+function bindTidyTabLauncher(params) {
+  const actor = params.app?.actor ?? params.app?.document;
+  if (!isCharacterActor(actor) || !canViewActor(actor)) return;
+
+  const openCard = () => openStudentCard(actor);
+  params.tabContentsElement?.querySelector(".ssc-tidy-tab-open")?.addEventListener("click", openCard);
+
+  const tabControl = params.element?.querySelector(`[data-tab-id="${TIDY_TAB_ID}"]`);
+  if (!tabControl || tabControl.dataset.sscBound === "true") return;
+  tabControl.dataset.sscBound = "true";
+
+  const activate = (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    openCard();
+  };
+  tabControl.addEventListener("click", activate, { capture: true });
+  tabControl.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") activate(event);
+  }, { capture: true });
+}
+function isTidyCharacterSheet(app) {
+  const api = game.modules.get("tidy5e-sheet")?.api;
+  if (!api?.isTidy5eCharacterSheet) return false;
+  return api.isTidy5eCharacterSheet(app);
+}
 function createActorSheetButton(actor, { compact = false } = {}) {
   const button = document.createElement("button");
   button.type = "button";
@@ -428,7 +475,9 @@ function makeDraggable(panel) {
 }
 
 function getCardData(actor) {
-  return normalizeCardData(actor.getFlag(MODULE_ID, FLAG_KEY) ?? actor.getFlag(LEGACY_MODULE_ID, FLAG_KEY));
+  const current = actor.getFlag(MODULE_ID, FLAG_KEY);
+  const legacy = actor.flags?.[LEGACY_MODULE_ID]?.[FLAG_KEY];
+  return normalizeCardData(current ?? legacy);
 }
 
 function normalizeCardData(value) {
