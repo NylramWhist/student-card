@@ -1,6 +1,6 @@
 const MODULE_ID = "student-card";
 const LEGACY_MODULE_ID = "strixhaven-student-card";
-const MODULE_VERSION = "1.1.15";
+const MODULE_VERSION = "1.1.16";
 const DATA_VERSION = 1;
 const FLAG_KEY = "card";
 const MAX_IMPORT_BYTES = 1_000_000;

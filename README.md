@@ -30,7 +30,13 @@ Simple Foundry VTT module for D&D 5e student campaigns.
 
 ## Installation
 
-Copy the `student-card` folder into your Foundry `Data/modules` folder, then enable **Student Card** in your world.
+In Foundry VTT, open **Add-on Modules**, choose **Install Module**, and paste this Manifest URL:
+
+```text
+https://raw.githubusercontent.com/NylramWhist/student-card/main/module.json
+```
+
+You can also copy the `student-card` folder into your Foundry `Data/modules` folder for a manual installation.
 
 ## Usage
 
@@ -45,13 +51,12 @@ This module intentionally avoids copying adventure text. It provides the tracker
 
 ## Changelog
 
+### 1.1.16
+
+- Added GitHub release metadata and automatic Foundry VTT package publishing.
+- Added a stable manifest URL for installation and update checks.
+
 ### 1.1.15
 
 - Added a collapsible Student Dice panel so the lower section can be hidden when it is not being used.
 - The collapse state is remembered per client and per actor.
-
-### 1.1.14
-
-- Replaced the Student Die confirm with the same centered modal used for Inspiration.
-- Both Student Die and Inspiration prompts now open in the middle of the screen with matching styling.
-- Student Die single-source prompts no longer fall back to the old Foundry dialog UI.
