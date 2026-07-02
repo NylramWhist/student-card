@@ -1938,3 +1938,18 @@
     width: 100%;
   }
 }
+
+.ssc-tidy-tab-launcher {
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.ssc-tidy-tab-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  padding-inline: 14px;
+}
