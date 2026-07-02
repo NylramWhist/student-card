@@ -1,0 +1,50 @@
+{
+  "id": "student-card",
+  "type": "module",
+  "title": "Student Card",
+  "description": "An actor-linked student record for relationships, exams, extracurriculars, jobs, graduation, and Student Dice automation.",
+  "version": "1.1.15",
+  "authors": [
+    {
+      "name": "Tomorokoshi"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14",
+    "maximum": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.0.0",
+          "verified": "5.3.3"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/student-card.js"
+  ],
+  "styles": [
+    "styles/student-card.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "lang/pl.json"
+    }
+  ],
+  "license": "LICENSE",
+  "readme": "README.md"
+}
+
